@@ -1,0 +1,79 @@
+form {
+  /* margin-top: 30px !important; */
+  margin: 0 auto !important;
+}
+
+.book_card {
+  background-color: hsl(0, 50%, 5%) !important;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 1rem;
+  text-align: center;
+  color: #f5f5f5;
+  width: 15rem;
+}
+
+@media (max-width: 768px) {
+  .book_card {
+    width: 100%;
+  }
+  .book_title {
+    font-size: 30px !important;
+  }
+  .book_author {
+    font-size: 20px !important;
+  }
+  .details_btn {
+    padding: 10px 100px !important;
+  }
+}
+
+.book_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9);
+}
+
+.book_img {
+  max-height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card_body {
+  padding: 10px;
+}
+
+/* Book title styling */
+.book_title {
+  font-size: 12px;
+  font-weight: bold;
+  /* margin: 15px 0; */
+  color: #f5f5f5 !important;
+}
+
+/* Book author styling */
+.book_author {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 20px !important;
+  color: #f5f5f5;
+}
+
+/* Button styling */
+.details_btn {
+  background-color: #ffffff !important;
+  color: #1a1a1d;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.details_btn:hover {
+  background-color: #ff0000 !important; /* Slightly darker yellow on hover */
+}
