@@ -9,7 +9,12 @@ const authRouter = require("./routes/authRoutes");
 app.use(express.json());
 
 // global middleware configuration for cross origin resource sharing
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://bookreco.vercel.app"],
+    credentials: true,
+  })
+);
 
 // global middleware configuration for cookie parser
 app.use(cookieParser());
