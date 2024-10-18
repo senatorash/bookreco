@@ -23,10 +23,10 @@ const userSchema = new Schema(
 
     isVerified: { type: Boolean, default: false },
 
-    verificationToken: { type: String, unique: true },
+    verificationToken: { type: String },
     verificationTokenExpires: { type: Date },
 
-    resetPasswordToken: { type: String, unique: true, sparse: true },
+    resetPasswordToken: { type: String },
     resetPasswordTokenExpires: { type: Date },
 
     password: { type: String, required: true },

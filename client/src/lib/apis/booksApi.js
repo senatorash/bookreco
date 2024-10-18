@@ -1,5 +1,5 @@
 export const booksApi = async (query, startIndex, maxResults) => {
-  const apiKey = "AIzaSyDJRTvCt97uOOPTy9deEGXcmKghbyzjwLs";
+  const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}&maxResults=${maxResults}&key=${apiKey}`;
 
   try {
