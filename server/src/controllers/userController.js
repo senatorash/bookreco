@@ -60,6 +60,7 @@ const verifyUserAccount = async (req, res) => {
     const { verificationToken } = req.body;
     //  check for user with verification token
     const user = await User.findOne({ verificationToken });
+    console.log(user);
 
     if (!user) {
       return res.status(404).json({ error: "User Not Found" });
