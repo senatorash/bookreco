@@ -5,6 +5,7 @@ const ProtectedRoutes = ({ user, children }) => {
     // redirected to the authentication page
     return <Navigate to="/auth/signin" replace />;
   }
+
   return children;
 };
 export default ProtectedRoutes;

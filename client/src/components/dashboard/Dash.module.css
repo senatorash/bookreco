@@ -1,0 +1,58 @@
+/* Dashboard.css */
+
+.dashboard {
+  background-color: #f8f9fa;
+}
+
+.offcanvas-header {
+  background-color: #ff0000; /* Red header for the sidebar */
+  color: white;
+}
+
+.offcanvas-body {
+  background-color: #000; /* Black body for the sidebar */
+}
+
+.nav-link {
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #ffffff;
+  color: #ff0000; /* Hover effect with brand red color */
+  font-weight: bold;
+}
+
+.dashboard-container {
+  padding: 20px;
+}
+
+.dashboard-content h2 {
+  color: #ff0000; /* Red accent color for headings */
+}
+
+.card {
+  background-color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: #ff0000; /* Red color for book titles */
+}
+
+.card-text {
+  color: #000; /* Black text for the book description */
+}
+
+.btn-primary {
+  background-color: #ff0000;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c00000; /* Darker red on hover */
+}

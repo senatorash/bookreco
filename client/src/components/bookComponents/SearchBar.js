@@ -1,15 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "../authComponents/Auth.module.css";
 
 const SearchBar = ({ fetchBooks }) => {
   const [input, setInput] = useState("");
+  const [searchHistory, setSearchHistory] = useState([]);
+
+  // Function to store search query in local storage
+  const storeSearchHistory = (query) => {
+    let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+    if (!history.includes(query)) {
+      history.unshift(query);
+    }
+
+    if (history.length > 5) {
+      history.pop();
+    }
+
+    // Avoid duplicate entries
+    if (!history.includes(query)) {
+      history.push(query);
+    }
+
+    localStorage.setItem("searchHistory", JSON.stringify(history));
+    setSearchHistory(history.slice(0, 5)); // Update the state to reflect changes
+  };
+
+  // Load search history when the component mounts
+  useEffect(() => {
+    const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    setSearchHistory(history);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (input.trim()) {
-      fetchBooks(input);
+      fetchBooks(input); // Trigger book search with the input
+      storeSearchHistory(input); // Store the search in local storage
     }
-    setInput("");
+    setInput(""); // Clear the input field
+  };
+
+  // Function to handle clicks on a search history item
+  const handleHistoryClick = (query) => {
+    fetchBooks(query);
+    setInput(query);
   };
 
   return (
@@ -26,16 +61,35 @@ const SearchBar = ({ fetchBooks }) => {
               className="form-control mb-3"
               type="text"
               placeholder="Search for books..."
-              // value={input}
+              value={input} // Set the value of input to the state
               onChange={(event) => setInput(event.target.value)}
             />
 
             <input
               className={`form-control ${classes.signup_btn}`}
-              type="Submit"
+              type="submit"
+              value="Search"
             />
           </div>
         </form>
+
+        {/* Display the Search History */}
+        {searchHistory.length > 0 && (
+          <div className="search-history">
+            <h4>Your Previous Searches:</h4>
+            <ul>
+              {searchHistory.map((query, index) => (
+                <li
+                  key={index}
+                  style={{ cursor: "pointer", color: "blue" }}
+                  onClick={() => handleHistoryClick(query)}
+                >
+                  {query}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-lg-3"></div>
     </div>

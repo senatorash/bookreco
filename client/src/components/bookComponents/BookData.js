@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { booksApi } from "../../lib/apis/booksApi";
 import BookList from "../bookComponents/BookList";
 import SearchBar from "./SearchBar";
+import InfoSection from "../homeComponents/InfoSection";
 
 const BookData = () => {
   const [books, setBooks] = useState([]);
@@ -42,9 +43,10 @@ const BookData = () => {
     }
   }, [query, startIndex]);
   return (
-    <div style={{ overflow: "hidden", marginTop: "30px" }}>
+    <div style={{ marginTop: "30px" }}>
       <SearchBar fetchBooks={handleSearch} />
       <BookList books={books} hasMore={hasMore} loadMoreBooks={loadMoreBooks} />
+      <InfoSection />
     </div>
   );
 };

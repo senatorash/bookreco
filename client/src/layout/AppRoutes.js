@@ -12,6 +12,7 @@ import AboutPage from "../pages/AboutPage";
 import CategoryPage from "../pages/CategoryPage";
 import ContactPage from "../pages/ContactPage";
 import BookPage from "../pages/BookPage";
+import Dashboard from "../components/dashboard/DashBoard";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.userState);
@@ -42,6 +43,15 @@ const AppRoutes = () => {
         element={
           <ProtectedRoutes user={user}>
             <BookPage />
+          </ProtectedRoutes>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoutes user={user}>
+            <Dashboard />
           </ProtectedRoutes>
         }
       />

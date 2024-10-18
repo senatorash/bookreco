@@ -25,19 +25,19 @@ const HeroSection = () => {
                 <div className="container">
                   <div className="row">
                     <div className="col-md-6">
-                      <div className={classes.detail_box}>
+                      <div className={`detail-box ${classes.detail_box}`}>
                         <h5>BookReco</h5>
 
                         <h1>
                           Limitless <span>Literature</span>, Endless Discovery
                         </h1>
-                        <Link className="fa-arrow" to="/">
+                        <Link className="mb-5" to="/">
                           Read More
                         </Link>
                       </div>
                     </div>
                     <div className="col-md-6">
-                      <div className="img-box">
+                      <div className="img-box mt-3">
                         <img src={sliderImg} alt="slider" />
                       </div>
                     </div>

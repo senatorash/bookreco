@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../lib/apis/authApis";
+import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
 import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +12,9 @@ const SigninForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const [getCurrentUser, { isSuccess: getUserSuccess }] =
+    useGetCurrentUserMutation();
 
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
     useLoginUserMutation();
@@ -34,9 +38,15 @@ const SigninForm = () => {
   useEffect(() => {
     if (isSuccess) {
       localStorage.setItem("refreshToken", data?.refreshToken);
-      navigate("/");
+      getCurrentUser();
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (getUserSuccess) {
+      navigate("/dashboard");
+    }
+  }, [getUserSuccess]);
   return (
     <form onSubmit={submitHandler}>
       <div className={classes.wrapper}>

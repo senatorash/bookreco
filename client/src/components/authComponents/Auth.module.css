@@ -13,6 +13,12 @@
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .wrapper {
+    width: 95%;
+  }
+}
+
 .wrapper:hover {
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
 }
@@ -106,6 +112,12 @@ h2 {
   justify-content: space-between;
   margin: 25px 0 35px 0;
   color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  .forget {
+    font-size: 13px;
+  }
 }
 
 #remember {

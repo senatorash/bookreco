@@ -3,11 +3,15 @@ import styles from "../authComponents/Auth.module.css";
 const BookModal = ({ book, handleClose, showModal }) => {
   const {
     title = "Unknown Title",
+    previewLink,
     imageLinks,
     authors = ["Unknown Author"],
     categories = ["Unknown Category"],
     publishedDate = "Unknown Date",
   } = book?.volumeInfo || {};
+
+  const viewability = book?.accessInfo?.viewability;
+
   return (
     <>
       {showModal && (
@@ -27,26 +31,46 @@ const BookModal = ({ book, handleClose, showModal }) => {
                   onClick={handleClose}
                 ></button>
               </div>
-              <div className="modal-body">
+              <div className={`modal-body ${classes.modal_body}`}>
                 <p className={`card-text ${classes.book_category}`}>
-                  <strong>Category:</strong> {categories.join(", ")}
+                  <strong>Category</strong>
+                  <br /> {categories.join(", ")}
                 </p>
                 <p>
-                  <strong>Author:</strong>{" "}
+                  <strong>Author</strong>
+                  <br />
                   {book?.volumeInfo?.authors?.join(", ") || "Unknown"}
                 </p>
                 <p className={`card-text ${classes.book_date}`}>
-                  <strong>Published Date:</strong> {publishedDate}
+                  <strong>Published Date</strong>
+                  <br /> {publishedDate}
                 </p>
                 <p>
-                  <strong>Description:</strong>{" "}
+                  <strong>Description</strong>
+                  <br />
                   {book?.volumeInfo?.description || "No Description Available"}
                 </p>
+
+                {viewability === "PARTIAL" ||
+                viewability === "ALL_PAGES" ||
+                viewability === "FULL_PUBLIC_DOMAIN" ? (
+                  <a
+                    href={previewLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className={classes.modal_btn}>Read/Preview</button>
+                  </a>
+                ) : (
+                  <p style={{ color: "#ff0000", padding: "10px" }}>
+                    Preview not available
+                  </p>
+                )}
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className={`btn btn-secondary ${classes.modal_btn}`}
                   onClick={handleClose}
                 >
                   Close

@@ -27,7 +27,7 @@ const BookCard = ({ book }) => {
         <img
           src={
             imageLinks?.large ||
-            imageLinks?.thumbnail ||
+            imageLinks?.smallThumbnail ||
             BookReco ||
             "default_image.jpg"
           }

@@ -196,7 +196,7 @@ const SignupForm = () => {
 
         <div className={classes.register}>
           <p>
-            Don't have an account?<Link to="/auth/signin">Sign in</Link>
+            Already have an account?<Link to="/auth/signin">Sign in</Link>
           </p>
           <p></p>
         </div>
