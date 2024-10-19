@@ -74,14 +74,14 @@ const NavBar = () => {
                 Contact Us
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className={`nav-link active ${classes.nav_text}`}
                 to="/books"
               >
                 Books
               </Link>
-            </li>
+            </li> */}
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
             <form class="search_form">
@@ -110,10 +110,9 @@ const NavBar = () => {
               <li className="nav-item">
                 <Link
                   className={`nav-link active ${classes.nav_text}`}
-                  to="/"
-                  onClick={onLogoutHandler}
+                  to="/dashboard"
                 >
-                  Logout
+                  Dashboard
                 </Link>
               </li>
             )}

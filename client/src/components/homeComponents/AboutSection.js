@@ -14,15 +14,33 @@ const AboutSection = () => {
           <div className="col-md-6">
             <div className="detail-box">
               <div className="heading_container">
-                <h2>About Our Bookstore</h2>
+                <h2>About BookReco</h2>
               </div>
               <p>
-                But no matter how much he is bound to trouble, or to assume by
-                rejecting him! Never to be rejected. Do they result in a blinded
-                refusal to accept his pains and sufferings? For some of the
-                present, a wise flexibility should be prepared, but here it will
-                be just a pleasure! Just because their lives are to be accepted,
-                they leave the guilt itself something to be softened to assume.
+                Welcome to Bookreco, your one-stop destination for discovering a
+                world of literature at your fingertips. We are an online
+                bookstore dedicated to making reading more accessible,
+                convenient, and enjoyable. Whether you’re a casual reader, a
+                student, or a literary enthusiast, we bring a diverse selection
+                of books across all genres straight to your screen.
+                <br />
+                <br />
+                Our carefully curated collection spans everything from
+                bestsellers and classics to indie gems and new releases. We
+                believe that the right book can change your life, and we are
+                committed to helping you find it, no matter your taste or
+                interest.
+                <br />
+                <br />
+                At Bookreco, we combine the charm of a traditional bookstore
+                with the convenience of modern technology. Our web application
+                offers an intuitive and user-friendly experience, allowing you
+                to browse, search, and shop with ease. Plus, our recommendation
+                system helps you discover books tailored to your preferences,
+                ensuring every read is a good one. Join us on this literary
+                journey and explore a universe of stories, knowledge, and
+                imagination. Happy reading! Feel free to modify the name or tone
+                to match your brand’s personality!
               </p>
               <a href="#">Read More</a>
             </div>

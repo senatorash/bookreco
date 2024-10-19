@@ -13,6 +13,16 @@
   background-color: #000; /* Black body for the sidebar */
 }
 
+.open_text {
+  color: #ffffff !important;
+  background-color: #ff0000 !important;
+}
+
+.open_text:hover {
+  background-color: #ffffff !important;
+  color: #ff0000 !important;
+}
+
 .nav-link {
   color: white;
   font-size: 1.2rem;
@@ -49,10 +59,42 @@
 }
 
 .btn-primary {
-  background-color: #ff0000;
-  border: none;
+  background-color: #ff0000 !important;
+  border: none !important;
 }
 
 .btn-primary:hover {
-  background-color: #c00000; /* Darker red on hover */
+  background-color: #ffffff !important; /* Darker red on hover */
+  color: #ff0000 !important;
+}
+
+.welcome_text {
+  font-size: 30px; /* Adjust size */
+  font-weight: bold;
+  color: #ffffff; /* Or match your brand color */
+  background-color: #ff0000;
+  border-radius: 15px;
+  width: 35%;
+  padding: 15px;
+  padding-left: 35px;
+  opacity: 0;
+  transform: translateY(-50px); /* Slide in from top */
+  animation: slideIn 1.5s ease-out forwards; /* Animation settings */
+}
+
+.welcome_text:hover {
+  background-color: #ffffff;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px); /* Start position */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End position */
+  }
 }

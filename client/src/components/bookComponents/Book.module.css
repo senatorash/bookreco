@@ -103,3 +103,33 @@
   background: rgba(255, 255, 255, 0.2) !important;
   border-color: #ff0000 !important;
 }
+
+.search_btn {
+  background-color: rgba(222, 10, 10, 0.1) !important; /* Green */
+  border: none !important;
+  list-style-type: none !important;
+  color: #ff0000 !important;
+  padding: 8px !important;
+  width: 80% !important;
+  text-align: left !important;
+  font-size: 15px !important;
+  font-weight: 600;
+  text-transform: capitalize !important;
+  margin-bottom: 20px !important;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease !important;
+}
+
+.search_btn:hover {
+  background-color: #ff0000 !important; /* Change color on hover */
+  color: #ffffff !important;
+  transform: scale(
+    1.1
+  ) !important; /* Slightly enlarge the button on hover (in effect) */
+}
+
+.search:active {
+  transform: scale(
+    0.95
+  ); /* Slightly shrink the button when clicked (out effect) */
+}

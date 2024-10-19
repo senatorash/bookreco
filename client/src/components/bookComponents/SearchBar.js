@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import classes from "../authComponents/Auth.module.css";
+import styles from "../bookComponents/Book.module.css";
 
 const SearchBar = ({ fetchBooks }) => {
   const [input, setInput] = useState("");
@@ -66,30 +67,35 @@ const SearchBar = ({ fetchBooks }) => {
             />
 
             <input
-              className={`form-control ${classes.signup_btn}`}
+              className={`form-control mb-5 ${classes.signup_btn}`}
               type="submit"
               value="Search"
             />
+
+            {searchHistory.length > 0 && (
+              <div className="search-history">
+                <h4>
+                  Your Previous Searches{" "}
+                  <hr style={{ color: "black", fontWeight: "800" }} />
+                </h4>
+                <ul>
+                  {searchHistory.map((query, index) => (
+                    <li
+                      className={styles.search_btn}
+                      key={index}
+                      style={{ cursor: "pointer", color: "blue" }}
+                      onClick={() => handleHistoryClick(query)}
+                    >
+                      {query}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </form>
 
         {/* Display the Search History */}
-        {searchHistory.length > 0 && (
-          <div className="search-history">
-            <h4>Your Previous Searches:</h4>
-            <ul>
-              {searchHistory.map((query, index) => (
-                <li
-                  key={index}
-                  style={{ cursor: "pointer", color: "blue" }}
-                  onClick={() => handleHistoryClick(query)}
-                >
-                  {query}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
       <div className="col-lg-3"></div>
     </div>
