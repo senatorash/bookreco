@@ -79,7 +79,7 @@ const SignupForm = () => {
         {isError && (
           <Errors
             errorMessage={
-              error?.data?.error ||
+              error?.data?.errors ||
               error?.data?.message ||
               "something went wrong"
             }
