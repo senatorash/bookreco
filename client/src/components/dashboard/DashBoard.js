@@ -90,7 +90,7 @@ const Dashboard = () => {
       {/* Dashboard Content */}
       <div className="dashboard-content container">
         <h2 className={`mb-4 ${classes.welcome_text}`}>
-          Welcome Back {user.firstName}
+          Welcome {user.firstName}
         </h2>
 
         {/* Book Recommendations Section */}
