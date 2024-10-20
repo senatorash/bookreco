@@ -69,12 +69,12 @@
 }
 
 .welcome_text {
-  font-size: 30px; /* Adjust size */
+  font-size: 40px; /* Adjust size */
   font-weight: bold;
   color: #ffffff; /* Or match your brand color */
   background-color: #ff0000;
   border-radius: 15px;
-  width: 30%;
+  width: 100%;
   text-align: center;
   padding: 15px;
   padding-left: 35px;
@@ -86,6 +86,7 @@
 @media (max-width: 768px) {
   .welcome_text {
     width: 100%;
+    font-size: 18px;
   }
 }
 
