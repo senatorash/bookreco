@@ -82,6 +82,12 @@
   animation: slideIn 1.5s ease-out forwards; /* Animation settings */
 }
 
+@media (max-width: 768px) {
+  .welcome_text {
+    width: 100%;
+  }
+}
+
 .welcome_text:hover {
   background-color: #ffffff;
   color: #ff0000;

@@ -20,9 +20,6 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [createNewUser, { isError, error, data, isLoading, isSuccess }] =
     useCreateNewUserMutation();
-  console.log(error);
-  console.log(data);
-  console.log(isSuccess);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
