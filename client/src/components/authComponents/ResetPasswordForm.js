@@ -9,7 +9,6 @@ const ResetPasswordForm = () => {
 
   const [resetPasswordRequest, { data, isSuccess, isError, isLoading, error }] =
     useResetPasswordRequestMutation();
-  console.log(data);
 
   const navigate = useNavigate();
 

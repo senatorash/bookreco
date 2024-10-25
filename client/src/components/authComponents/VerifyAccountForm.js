@@ -12,8 +12,6 @@ const VerifyAccountForm = () => {
   const [verifyUserAccount, { isError, error, data, isLoading, isSuccess }] =
     useVerifyUserAccountMutation();
 
-  console.log(error);
-
   const navigate = useNavigate();
 
   useEffect(() => {

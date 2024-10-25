@@ -18,7 +18,6 @@ const SigninForm = () => {
 
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
     useLoginUserMutation();
-  console.log(data);
 
   const navigate = useNavigate();
 

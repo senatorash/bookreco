@@ -74,7 +74,8 @@
   color: #ffffff; /* Or match your brand color */
   background-color: #ff0000;
   border-radius: 15px;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
   text-align: center;
   padding: 15px;
   padding-left: 35px;

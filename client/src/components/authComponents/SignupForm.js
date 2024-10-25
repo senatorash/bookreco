@@ -49,8 +49,6 @@ const SignupForm = () => {
     const dobString = `${dob.year}-${monthIndex
       .toString()
       .padStart(2, "0")}-${dob.day.toString().padStart(2, "0")}`;
-    console.log(dobString);
-    // const dobDate = new Date(dobString).toISOString();
 
     return await createNewUser({
       firstName,

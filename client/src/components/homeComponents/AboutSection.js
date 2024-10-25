@@ -42,7 +42,7 @@ const AboutSection = () => {
                 imagination. Happy reading! Feel free to modify the name or tone
                 to match your brand’s personality!
               </p>
-              <a href="#">Read More</a>
+              <Link href="/dashboard">Read More</Link>
             </div>
           </div>
         </div>
