@@ -13,7 +13,6 @@ const HomePage = () => {
       <AboutSection />
       <Testimonials />
       <ContactSection />
-      <InfoSection />
     </>
   );
 };

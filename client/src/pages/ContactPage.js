@@ -41,7 +41,6 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
-      <InfoSection />
     </>
   );
 };

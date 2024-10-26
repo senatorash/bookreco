@@ -35,9 +35,7 @@ export const userApis = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setCurrentUser(data?.user));
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       },
     }),
   }),

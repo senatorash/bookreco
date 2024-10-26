@@ -14,7 +14,6 @@ const BookData = () => {
 
   const onGetBooksData = async (query) => {
     const result = await booksApi(query, startIndex, maxResults);
-    console.log(result);
 
     if (result.error) {
       return setErrorMessage(result.error);

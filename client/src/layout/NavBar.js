@@ -84,14 +84,14 @@ const NavBar = () => {
             </li> */}
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
-            <form class="search_form">
+            <form className="search_form">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Search here..."
               />
-              <button class="" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i>
+              <button className="" type="submit">
+                <i className="fa fa-search" aria-hidden="true"></i>
               </button>
             </form>
 

@@ -114,7 +114,6 @@ const CategoryPage = () => {
           </div>
         </div>
       </section>
-      <InfoSection />
     </>
   );
 };
