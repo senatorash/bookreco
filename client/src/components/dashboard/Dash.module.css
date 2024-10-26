@@ -74,7 +74,7 @@
   color: #ffffff; /* Or match your brand color */
   background-color: #ff0000;
   border-radius: 15px;
-  width: 70%;
+  width: 45%;
   margin: 0 auto;
   text-align: center;
   padding: 15px;
@@ -87,7 +87,7 @@
 @media (max-width: 768px) {
   .welcome_text {
     width: 100%;
-    font-size: 18px;
+    font-size: 25px;
   }
 }
 
