@@ -16,6 +16,7 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
   const [createNewUser, { isError, error, data, isLoading, isSuccess }] =
@@ -23,6 +24,10 @@ const SignupForm = () => {
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   const handleDobChange = (event) => {
@@ -162,27 +167,29 @@ const SignupForm = () => {
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <button
+          <span
             onClick={togglePasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </button>
+          </span>
         </div>
 
         <div className={`d-flex form-group mb-3 ${classes.input_field}`}>
           <input
             className="form-control"
-            type={passwordVisible ? "text" : "password"}
+            type={confirmPasswordVisible ? "text" : "password"}
             placeholder="Confirm Password"
             onChange={(event) => setConfirmPassword(event.target.value)}
           />
-          <button
-            onClick={togglePasswordVisibility}
+          <span
+            onClick={toggleConfirmPasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
-            <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </button>
+            <FontAwesomeIcon
+              icon={confirmPasswordVisible ? faEyeSlash : faEye}
+            />
+          </span>
         </div>
 
         <div className="form-group mb-3">

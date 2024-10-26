@@ -13,6 +13,7 @@ const UpdatePasswordForm = () => {
   const [resetPasswordToken, setResetPasswordToken] = useState("");
   const [timeLeft, setTimeLeft] = useState(300);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const [updateUserPassword, { isError, error, data, isSuccess, isLoading }] =
     useUpdateUserPasswordMutation();
@@ -31,6 +32,10 @@ const UpdatePasswordForm = () => {
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   const submitHandler = async (event) => {
@@ -73,27 +78,29 @@ const UpdatePasswordForm = () => {
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <button
+          <span
             onClick={togglePasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </button>
+          </span>
         </div>
 
         <div className={`d-flex form-group mb-3 ${classes.input_field}`}>
           <input
             className="form-control"
-            type={passwordVisible ? "text" : "password"}
+            type={confirmPasswordVisible ? "text" : "password"}
             placeholder="Confirm Password"
             onChange={(event) => setConfirmPassword(event.target.value)}
           />
-          <button
-            onClick={togglePasswordVisibility}
+          <span
+            onClick={toggleConfirmPasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
-            <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </button>
+            <FontAwesomeIcon
+              icon={confirmPasswordVisible ? faEyeSlash : faEye}
+            />
+          </span>
         </div>
 
         <div className={`form-group mb-3 ${classes.input_field}`}>
