@@ -9,7 +9,7 @@ import classes from "../components/homeComponents/Home.module.css";
 const NavBar = () => {
   const [getCurrentUser] = useGetCurrentUserMutation();
 
-  const [logoutUser] = useLogoutUserMutation();
+  // const [logoutUser] = useLogoutUserMutation();
 
   const { user } = useSelector((state) => state.userState);
 
@@ -17,11 +17,11 @@ const NavBar = () => {
     getCurrentUser();
   }, []);
 
-  const onLogoutHandler = async (event) => {
-    event.preventDefault();
+  // const onLogoutHandler = async (event) => {
+  //   event.preventDefault();
 
-    return logoutUser();
-  };
+  //   return logoutUser();
+  // };
   return (
     <nav className={`navbar navbar-expand-lg  fixed-top  ${classes.nav_bar}`}>
       <div className="container-fluid">

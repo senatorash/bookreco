@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getCurrentUser();
-  }, [getCurrentUser]);
+  }, []);
 
   const onLogoutHandler = async (event) => {
     event.preventDefault();
