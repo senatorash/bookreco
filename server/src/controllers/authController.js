@@ -132,11 +132,21 @@ const generateNewAccessToken = async (req, res) => {
 // logout user
 const logoutUser = async (req, res) => {
   try {
+    // Clear the accessToken cookie
+    const cookieOptions = {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    };
+
+    // Clear the cookie by setting it to expired
     return res
-      .clearCookie("accessToken")
+      .clearCookie("accessToken", cookieOptions)
+      .status(200)
       .json({ message: "Logged out successfully" });
   } catch (error) {
-    return res.status(500).json({ error: "Internal Server" });
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
