@@ -78,7 +78,7 @@ const generateNewAccessToken = async (req, res) => {
 
     //check if the header exist
     if (!headers) {
-      console.log(error);
+      // console.log(error);
       return res.status(403).json({ error: "Authorization header missing" });
     }
 
@@ -90,7 +90,7 @@ const generateNewAccessToken = async (req, res) => {
     // get the refresh token
     const refreshToken = headers.split(" ")[1];
     // verify the refresh token
-    const payLoad = jwt.verify(refreshToken, JWT_SECRET);
+    const payLoad = verifyToken(refreshToken, JWT_SECRET);
     if (!payLoad) {
       return res.status(403).json({ error: "Invalid Token" });
     }

@@ -7,13 +7,16 @@ import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCookies } from "react-cookie";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const [getCurrentUser, { isSuccess: getUserSuccess }] =
+  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [getCurrentUser, { isSuccess: getUserSuccess, data: getData }] =
     useGetCurrentUserMutation();
 
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
@@ -39,13 +42,13 @@ const SigninForm = () => {
       localStorage.setItem("refreshToken", data?.refreshToken);
       getCurrentUser();
     }
-  }, [isSuccess]);
+  }, [isSuccess, data, getCurrentUser]);
 
   useEffect(() => {
-    if (getUserSuccess) {
-      navigate("/dashboard");
+    if (getUserSuccess && getData?.user) {
+      navigate("dashboard");
     }
-  }, [getUserSuccess]);
+  }, [getUserSuccess, getData, navigate]);
   return (
     <form onSubmit={submitHandler}>
       <div className={classes.wrapper}>

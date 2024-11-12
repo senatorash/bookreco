@@ -1,4 +1,3 @@
-import InfoSection from "../components/homeComponents/InfoSection";
 import ContactImg from "../Assets/contact-img.png";
 
 const ContactPage = () => {

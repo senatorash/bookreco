@@ -6,7 +6,7 @@ import { setCurrentUser } from "../lib/redux/userSlice";
 export const ChatContext = createContext();
 
 const ChatContextProvider = () => {
-  const API_URL = "http://localhost:3001";
+  // const API_URL = "http://localhost:3001";
 
   const socket = useRef(io(API_URL));
 

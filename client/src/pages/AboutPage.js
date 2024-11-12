@@ -1,5 +1,4 @@
 import aboutImg from "../Assets/about-img.png";
-import InfoSection from "../components/homeComponents/InfoSection";
 
 const AboutPage = () => {
   return (

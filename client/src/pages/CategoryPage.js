@@ -4,7 +4,6 @@ import cat3 from "../Assets/cat3.png";
 import cat4 from "../Assets/cat4.png";
 import cat5 from "../Assets/cat5.png";
 import cat6 from "../Assets/cat6.png";
-import InfoSection from "../components/homeComponents/InfoSection";
 
 const CategoryPage = () => {
   return (
