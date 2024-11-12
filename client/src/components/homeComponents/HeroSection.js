@@ -31,7 +31,7 @@ const HeroSection = () => {
                         <h1>
                           Limitless <span>Literature</span>, Endless Discovery
                         </h1>
-                        <Link className="mb-5" to="/dashboard">
+                        <Link className="mb-5" to="/auth/signin">
                           Read More
                         </Link>
                       </div>
@@ -72,7 +72,7 @@ const HeroSection = () => {
                           to the adipiscing process. He who wants to often leave
                           the pain to the option.
                         </p>
-                        <Link to="/dashboard">Read More</Link>
+                        <Link to="/auth/signin">Read More</Link>
                       </div>
                     </div>
                     <div className="col-md-6">

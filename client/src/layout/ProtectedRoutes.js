@@ -7,19 +7,19 @@ const ProtectedRoutes = ({ user, children }) => {
   useEffect(() => {
     // Check if the user exists and update loading state
     if (user) {
-      setLoading(false); // User is authenticated
+      setLoading(false);
     } else {
-      setLoading(true); // User is not authenticated
+      setLoading(true);
     }
   }, [user]);
 
-  // Show a loading spinner until the user state is verified
   if (loading) {
     return <div style={{ marginTop: "80px", color: "red" }}>Loading...</div>;
   }
 
   // If user is not authenticated, redirect to sign-in page
   if (!user) {
+    // setLoading(true);
     return <Navigate to="/auth/signin" replace />;
   }
 
