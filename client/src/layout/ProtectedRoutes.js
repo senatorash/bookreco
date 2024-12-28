@@ -1,68 +1,49 @@
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const ProtectedRoutes = ({ user, children }) => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if the user exists and update loading state
-    if (user) {
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
-  }, [user]);
+    // Simulate an async check for authentication status
+    const checkAuthentication = async () => {
+      try {
+        // Simulate delay for async operation
+        await new Promise((resolve) => setTimeout(resolve, 100)); // Replace this with actual logic if necessary
+      } catch (error) {
+        // console.error("Error checking authentication:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (loading) {
-    return <div style={{ marginTop: "80px", color: "red" }}>Loading...</div>;
+    checkAuthentication();
+  }, []);
+
+  if (isLoading) {
+    // Show a loading spinner or message while checking authentication
+    return (
+      <div
+        style={{
+          marginTop: "100px",
+          color: "red",
+          fontSize: "30px",
+          marginLeft: "100px",
+          fontWeight: "bold",
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
-  // If user is not authenticated, redirect to sign-in page
   if (!user) {
-    // setLoading(true);
+    // Redirect to the sign-in page if not authenticated
     return <Navigate to="/auth/signin" replace />;
   }
 
-  // If user is authenticated, render the protected content (children)
+  // Render the protected component if authenticated
   return children;
 };
 
 export default ProtectedRoutes;
-
-// import { useEffect, useState } from "react";
-// import { Navigate } from "react-router-dom";
-// import { useGenerateNewAccessTokenMutation } from "../lib/apis/authApis";
-
-// const ProtectedRoutes = ({ user, children }) => {
-//   const [loading, setLoading] = useState(true);
-//   // const [generateNewAccessToken] = useGenerateNewAccessTokenMutation();
-
-//   useEffect(() => {
-//     const verifyAuth = async () => {
-//       if (!user) {
-//         // Attempt to refresh the access token
-//         // const token = await generateNewAccessToken();
-
-//         // if (!token) {
-//         // Redirect to sign-in if token generation fails
-//         setLoading(false);
-//         return <Navigate to="/auth/signin" replace />;
-//         // }
-//       }
-//       // Authentication verified
-//       setLoading(false);
-//     };
-
-//     verifyAuth();
-//   }, [user]);
-
-//   // Display a loading spinner or blank state until authentication is verified
-//   if (loading) {
-//     return <div>Loading...</div>; // Replace with a spinner or skeleton loader if desired
-//   }
-
-//   // Render protected content if authenticated
-//   return children;
-// };
-
-// export default ProtectedRoutes;

@@ -13,7 +13,7 @@ import CategoryPage from "../pages/CategoryPage";
 import ContactPage from "../pages/ContactPage";
 import BookPage from "../pages/BookPage";
 import Dashboard from "../components/dashboard/DashBoard";
-
+import ChatPage from "../pages/ChatPage";
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.userState);
   return (
@@ -55,6 +55,8 @@ const AppRoutes = () => {
           </ProtectedRoutes>
         }
       />
+
+      <Route path="/chat" element={<ChatPage />} />
     </Routes>
   );
 };

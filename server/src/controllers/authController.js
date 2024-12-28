@@ -1,7 +1,6 @@
 const dayjs = require("dayjs");
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const { generateToken, verifyToken } = require("../helpers/jwtHelpers");
 const { generateOTP } = require("../helpers/randomCodeGenerator");
 const { sendPasswordResetToken } = require("../helpers/emailHelpers");
@@ -55,7 +54,7 @@ const loginUser = async (req, res) => {
     // send back success response with tokens
     // also save access token to browser cookie storage
     const cookieOptions = {
-      expires: new Date(Date.now() + 3600),
+      expires: new Date(Date.now() + 30 * 1000),
       maxAge: 60 * 60 * 1000,
       httpOnly: true,
       sameSite: "none",
@@ -91,6 +90,7 @@ const generateNewAccessToken = async (req, res) => {
     const refreshToken = headers.split(" ")[1];
     // verify the refresh token
     const payLoad = verifyToken(refreshToken, JWT_SECRET);
+    console.log(payLoad);
     if (!payLoad) {
       return res.status(403).json({ error: "Invalid Token" });
     }
@@ -102,14 +102,20 @@ const generateNewAccessToken = async (req, res) => {
       isVerified: payLoad.isVerified,
     };
     // generate new access token
-    const accessToken = generateToken(userData, "1h", JWT_SECRET);
+    const accessToken = generateToken(
+      userData,
+      `${ACCESS_TOKEN_EXPIRES_IN}h`,
+      JWT_SECRET
+    );
+
+    console.log("Generated access token", accessToken);
     if (!accessToken) {
       return res.status(400).json({ error: "token generation failed" });
     }
     // send back success response with tokens
     // also save access token to browser cookie storage
     const cookieOptions = {
-      expires: new Date(Date.now() + 3600),
+      expires: new Date(Date.now() + 3600 * 1000),
       httpOnly: true,
       sameSite: "none",
       secure: true,
@@ -117,6 +123,7 @@ const generateNewAccessToken = async (req, res) => {
     return res.cookie("accessToken", accessToken, cookieOptions).json({
       message: "New Access Token Generated Successfully",
       accessToken,
+      user: userData,
     });
   } catch (error) {
     if (error.name === "TokenExpiredError") {

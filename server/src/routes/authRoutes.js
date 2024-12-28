@@ -30,6 +30,6 @@ authRouter.put(
   checkValidationErrors,
   updateUserPassword
 );
-authRouter.post("/access-token", generateNewAccessToken);
+authRouter.post("/token", generateNewAccessToken);
 
 module.exports = authRouter;

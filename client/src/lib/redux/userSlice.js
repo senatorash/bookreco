@@ -9,11 +9,14 @@ export const userSlice = createSlice({
   name: "userState",
   reducers: {
     setCurrentUser: (state, action) => {
+      // const { user, accessToken } = action.payload;
       state.user = action.payload;
+      state.accessToken = action.payload;
     },
 
     clearCurrentUser: (state, action) => {
       state.user = null;
+      state.token = null;
     },
   },
 });

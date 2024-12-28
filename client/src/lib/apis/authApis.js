@@ -3,31 +3,10 @@ import { userApis } from "./userApis";
 import { clearCurrentUser } from "../redux/userSlice";
 
 let baseUrl = process.env.REACT_APP_API_BASE_URL;
-const baseQueryWithTokenRefresh = async (args, api, extraOptions) => {
-  const baseQueryResult = await fetchBaseQuery({
-    baseUrl,
-    credentials: "include",
-  })(args, api, extraOptions);
-
-  if (baseQueryResult.error?.status === 403) {
-    const refreshResult = await api.dispatch(
-      authApis.endpoints.generateNewAccessToken.initiate()
-    );
-    if (refreshResult?.data?.accessToken) {
-      baseQueryResult = await fetchBaseQuery({
-        baseUrl,
-        credentials: "include",
-      })(args, api, extraOptions);
-    } else {
-      api.dispatch(authApis.endpoints.logoutUser.initiate());
-    }
-  }
-  return baseQueryResult;
-};
 
 export const authApis = createApi({
   reducerPath: "authApis",
-  baseQuery: baseQueryWithTokenRefresh, //fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
 
   endpoints: (builder) => ({
     loginUser: builder.mutation({
@@ -83,23 +62,23 @@ export const authApis = createApi({
       }),
     }),
 
-    generateNewAccessToken: builder.mutation({
-      query: () => ({
-        url: "auth/access-token",
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json", // Set Content-Type header if needed
-        },
-      }),
+    // generateNewAccessToken: builder.mutation({
+    //   query: () => ({
+    //     url: "auth/access-token",
+    //     method: "POST",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json", // Set Content-Type header if needed
+    //     },
+    //   }),
 
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          // localStorage.setItem("accessToken", data.accessToken);
-        } catch (error) {}
-      },
-    }),
+    //   async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+    //     try {
+    //       await queryFulfilled;
+    //       // localStorage.setItem("accessToken", data.accessToken);
+    //     } catch (error) {}
+    //   },
+    // }),
   }),
 });
 

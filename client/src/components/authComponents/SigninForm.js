@@ -46,7 +46,7 @@ const SigninForm = () => {
 
   useEffect(() => {
     if (getUserSuccess && getData?.user) {
-      navigate("dashboard");
+      navigate("/dashboard");
     }
   }, [getUserSuccess, getData, navigate]);
   return (
@@ -89,7 +89,7 @@ const SigninForm = () => {
         </div>
 
         <div className={classes.forget}>
-          <label for="remember">
+          <label htmlFor="remember">
             <input type="checkbox" id="remember" />
             <p>Remember Me</p>
           </label>
