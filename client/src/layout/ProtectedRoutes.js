@@ -9,7 +9,7 @@ const ProtectedRoutes = ({ user, children }) => {
     const checkAuthentication = async () => {
       try {
         // Simulate delay for async operation
-        await new Promise((resolve) => setTimeout(resolve, 100)); // Replace this with actual logic if necessary
+        await new Promise((resolve) => setTimeout(resolve, 500)); // Replace this with actual logic if necessary
       } catch (error) {
         // console.error("Error checking authentication:", error);
       } finally {
