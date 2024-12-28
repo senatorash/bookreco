@@ -1,4 +1,4 @@
 /node_modules
 .env
-src/helpers/socket
+src/helpers/socket/socketHelpers.js
 src/helpers/profanityFilter
