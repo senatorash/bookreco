@@ -34,16 +34,20 @@ const SigninForm = () => {
     if (!email || !password) {
       return;
     }
-    return await loginUser({ email, password });
+
+    const { data, error } = await loginUser({ email, password });
+
+    if (!error) navigate("/dashboard");
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      localStorage.setItem("refreshToken", data?.refreshToken);
-      getCurrentUser();
-      navigate("/dashboard");
-    }
-  }, [isSuccess, data, getCurrentUser]);
+  // useEffect(() => {
+  // if (isSuccess) {
+  //   localStorage.setItem("refreshToken", data?.refreshToken);
+  //   getCurrentUser().then(() => {
+  //     navigate("/dashboard");
+  //   });
+  // }
+  // }, [isSuccess, data, getCurrentUser]);
 
   // useEffect(() => {
   //   if (getUserSuccess && getData?.user) {
