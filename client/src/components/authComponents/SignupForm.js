@@ -7,6 +7,7 @@ import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useFormValidator from "../../hooks/useFormValidator";
 
 const SignupForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -29,6 +30,14 @@ const SignupForm = () => {
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
+
+  const { formIsValid, formError } = useFormValidator(
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword
+  );
 
   const handleDobChange = (event) => {
     const { name, value } = event.target;
@@ -76,7 +85,15 @@ const SignupForm = () => {
       <div className={classes.wrapper}>
         <h3 className="mb-3 mt-5">Sign Up</h3>
 
-        {isError && (
+        {formError && (
+          <div className="alert alert-danger mt-5" role="alert">
+            {typeof formError === "string"
+              ? formError
+              : JSON.stringify(formError)}
+          </div>
+        )}
+
+        {/* {isError && (
           <Errors
             errorMessage={
               error?.data?.errors ||
@@ -84,7 +101,7 @@ const SignupForm = () => {
               "something went wrong"
             }
           />
-        )}
+        )} */}
 
         <div className={`form-group mb-3 ${classes.input_field}`}>
           <input

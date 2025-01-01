@@ -15,7 +15,7 @@ const SigninForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [cookies, setCookie] = useCookies(["accessToken"]);
+  // const [cookies, setCookie] = useCookies(["accessToken"]);
   const [getCurrentUser, { isSuccess: getUserSuccess, data: getData }] =
     useGetCurrentUserMutation();
 
@@ -41,14 +41,15 @@ const SigninForm = () => {
     if (isSuccess) {
       localStorage.setItem("refreshToken", data?.refreshToken);
       getCurrentUser();
+      navigate("/dashboard");
     }
   }, [isSuccess, data, getCurrentUser]);
 
-  useEffect(() => {
-    if (getUserSuccess && getData?.user) {
-      navigate("/dashboard");
-    }
-  }, [getUserSuccess, getData, navigate]);
+  // useEffect(() => {
+  //   if (getUserSuccess && getData?.user) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [getUserSuccess, getData, navigate]);
   return (
     <form onSubmit={submitHandler}>
       <div className={classes.wrapper}>
