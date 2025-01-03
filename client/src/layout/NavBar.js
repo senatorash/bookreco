@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useGetCurrentUserMutation } from "../lib/apis/userApis";
-import { useLogoutUserMutation } from "../lib/apis/authApis";
+// import { useLogoutUserMutation } from "../lib/apis/authApis";
 import BookReco from "../Assets/Book Reco.png";
 import classes from "../components/homeComponents/Home.module.css";
 

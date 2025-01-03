@@ -11,12 +11,12 @@ export const userSlice = createSlice({
     setCurrentUser: (state, action) => {
       // const { user, accessToken } = action.payload;
       state.user = action.payload;
-      state.accessToken = action.payload;
+      // state.accessToken = action.payload;
     },
 
     clearCurrentUser: (state, action) => {
       state.user = null;
-      state.token = null;
+      // state.token = null;
     },
   },
 });

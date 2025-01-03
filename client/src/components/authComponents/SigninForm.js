@@ -37,7 +37,7 @@ const SigninForm = () => {
 
     const { data, error } = await loginUser({ email, password });
 
-    if (!error) navigate("/dashboard");
+    // if (!error) navigate("/dashboard");
   };
 
   useEffect(() => {

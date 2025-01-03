@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
       expires: new Date(Date.now() + 30 * 1000),
       maxAge: 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: true,
     };
     return res
