@@ -16,8 +16,8 @@ const SigninForm = () => {
   const [loading, setLoading] = useState(true);
 
   // const [cookies, setCookie] = useCookies(["accessToken"]);
-  const [getCurrentUser, { isSuccess: getUserSuccess, data: getData }] =
-    useGetCurrentUserMutation();
+  // const [getCurrentUser, { isSuccess: getUserSuccess, data: getData }] =
+  //   useGetCurrentUserMutation();
 
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
     useLoginUserMutation();
@@ -40,14 +40,11 @@ const SigninForm = () => {
     if (!error) navigate("/dashboard");
   };
 
-  // useEffect(() => {
-  // if (isSuccess) {
-  //   localStorage.setItem("refreshToken", data?.refreshToken);
-  //   getCurrentUser().then(() => {
-  //     navigate("/dashboard");
-  //   });
-  // }
-  // }, [isSuccess, data, getCurrentUser]);
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("refreshToken", data?.refreshToken);
+    }
+  }, [isSuccess, data]);
 
   // useEffect(() => {
   //   if (getUserSuccess && getData?.user) {
