@@ -20,9 +20,9 @@ const Dashboard = () => {
     setShowOffcanvas(!showOffcanvas);
   };
 
-  useEffect(() => {
-    getCurrentUser();
-  }, [getCurrentUser]);
+  // useEffect(() => {
+  //   getCurrentUser();
+  // }, [getCurrentUser]);
 
   const onLogoutHandler = async (event) => {
     event.preventDefault();
