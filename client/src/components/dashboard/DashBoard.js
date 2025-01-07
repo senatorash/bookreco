@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
 import { useLogoutUserMutation } from "../../lib/apis/authApis";
 import { Link } from "react-router-dom";
+import { persistor } from "../../store/store";
 import "./Dash.module.css"; // Custom CSS file for additional styles
 import BookReco from "../../Assets/Book Reco.png";
 import classes from "./Dash.module.css";
@@ -27,7 +28,10 @@ const Dashboard = () => {
   const onLogoutHandler = async (event) => {
     event.preventDefault();
 
-    return logoutUser();
+    await persistor.flush();
+
+    await logoutUser();
+    await persistor.purge();
   };
 
   return (

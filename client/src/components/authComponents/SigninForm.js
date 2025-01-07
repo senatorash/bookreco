@@ -82,12 +82,12 @@ const SigninForm = () => {
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <span
+          <button
             onClick={togglePasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </span>
+          </button>
         </div>
 
         <div className={classes.forget}>
