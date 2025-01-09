@@ -2,22 +2,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../lib/apis/authApis";
-import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
+// import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
 import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCookies } from "react-cookie";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  // const [cookies, setCookie] = useCookies(["accessToken"]);
-  // const [getCurrentUser, { isSuccess: getUserSuccess, data: getData }] =
-  //   useGetCurrentUserMutation();
 
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
     useLoginUserMutation();
@@ -36,6 +30,7 @@ const SigninForm = () => {
     }
 
     const { data, error } = await loginUser({ email, password });
+    console.log(data);
 
     // if (!error) navigate("/dashboard");
   };
@@ -82,12 +77,12 @@ const SigninForm = () => {
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <button
+          <span
             onClick={togglePasswordVisibility}
             style={{ border: "none", marginLeft: "10px", background: "none" }}
           >
             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-          </button>
+          </span>
         </div>
 
         <div className={classes.forget}>

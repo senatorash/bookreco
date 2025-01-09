@@ -8,6 +8,9 @@ const authRouter = require("./routes/authRoutes");
 // global middleware configuration to receive JSON data from client
 app.use(express.json());
 
+// global middleware configuration for cookie parser
+app.use(cookieParser());
+
 // global middleware configuration for cross origin resource sharing
 app.use(
   cors({
@@ -15,9 +18,6 @@ app.use(
     credentials: true,
   })
 );
-
-// global middleware configuration for cookie parser
-app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({ message: "Server is Live!" });

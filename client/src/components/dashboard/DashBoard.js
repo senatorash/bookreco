@@ -27,11 +27,7 @@ const Dashboard = () => {
 
   const onLogoutHandler = async (event) => {
     event.preventDefault();
-
-    await persistor.flush();
-
     await logoutUser();
-    await persistor.purge();
   };
 
   return (
