@@ -22,7 +22,8 @@ const validateUser = (req, res) => {
       .withMessage("Email is required")
       .isEmail()
       .withMessage("Invalid Email Address")
-      .normalizeEmail(),
+      .normalizeEmail()
+      .escape(),
     // password
     body("password")
       .notEmpty()
@@ -54,6 +55,23 @@ const validateUser = (req, res) => {
   ];
 };
 
+const validateLogin = () => {
+  return [
+    body("email")
+      .notEmpty()
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("Invalid Email Address")
+      .normalizeEmail(),
+
+    body("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .trim()
+      .escape(),
+  ];
+};
+
 const resetToken = (req, res) => {
   return [
     // email
@@ -62,7 +80,8 @@ const resetToken = (req, res) => {
       .withMessage("Email is required")
       .isEmail()
       .withMessage("Invalid Email Address")
-      .normalizeEmail(),
+      .normalizeEmail()
+      .escape(),
   ];
 };
 
@@ -118,4 +137,5 @@ module.exports = {
   resetToken,
   updatePassword,
   checkValidationErrors,
+  validateLogin,
 };

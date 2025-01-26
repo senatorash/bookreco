@@ -3,7 +3,11 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const { generateToken, verifyToken } = require("../helpers/jwtHelpers");
 const { generateOTP } = require("../helpers/randomCodeGenerator");
-const { sendPasswordResetToken } = require("../helpers/emailHelpers");
+const {
+  sendPasswordResetToken,
+  sendOtpToUser,
+} = require("../helpers/emailHelpers");
+const verifyGoogleToken = require("../helpers/authHelpers");
 const {
   JWT_SECRET,
   ACCESS_TOKEN_EXPIRES_IN,
@@ -244,10 +248,79 @@ const updateUserPassword = async (req, res) => {
   }
 };
 
+const googleAuth = async (req, res, next) => {
+  const { token } = req.body;
+  const decodedToken = decodeURIComponent(token);
+
+  try {
+    // Verify Google token
+    const { email, given_name, family_name } = await verifyGoogleToken(
+      decodedToken
+    );
+
+    // Check if the user already exists
+    const userExist = await User.findOne({ email });
+
+    if (userExist) {
+      if (userExist.isVerified) {
+        const authToken = generateToken({
+          id: userExist._id,
+          email: userExist.email,
+        });
+
+        return res.status(200).json({
+          message: "User logged in successfully",
+          token: authToken,
+          user: {
+            id: userExist._id,
+            firstName: userExist.firstName,
+            lastName: userExist.lastName,
+            email: userExist.email,
+          },
+        });
+      }
+
+      // If user exists but is not verified, send a verification email
+      userExist.verificationToken = generateOTP();
+      userExist.verificationTokenExpires = dayjs().add(5, "minute").toDate();
+      await userExist.save();
+
+      sendOtpToUser(userExist.verificationToken, userExist.email); // Pass the email correctly
+
+      return res.status(400).json({
+        message: "Account not verified. Verification email sent.",
+      });
+    }
+
+    // If user does not exist, create a new one
+    const newUser = new User({
+      firstName: given_name,
+      lastName: family_name,
+      email,
+    });
+
+    newUser.verificationToken = generateOTP();
+    newUser.verificationTokenExpires = dayjs().add(5, "minute").toDate();
+
+    await newUser.save();
+
+    // Send verification email to the new user
+    sendOtpToUser(newUser.verificationToken, userExist.email); // Pass the email correctly
+
+    return res.status(200).json({
+      message: "User created successfully. Please verify your email.",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   loginUser,
   generateNewAccessToken,
   logoutUser,
   resetPasswordRequest,
   updateUserPassword,
+  googleAuth,
 };

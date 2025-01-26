@@ -109,7 +109,7 @@ const verifyUserAccount = async (req, res) => {
 const getCurrentUser = async (req, res) => {
   try {
     const { userId } = req.user;
-    const user = await User.findById(userId).select("-password -isVerified");
+    const user = await User.findById(userId).select("-password");
     if (!user) {
       return res.status(404).json({ error: "user not found" });
     }

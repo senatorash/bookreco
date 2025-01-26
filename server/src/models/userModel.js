@@ -18,7 +18,7 @@ const userSchema = new Schema(
 
     dob: {
       type: Date,
-      required: true,
+      // required: true,
     },
 
     isVerified: { type: Boolean, default: false },
@@ -29,7 +29,7 @@ const userSchema = new Schema(
     resetPasswordToken: { type: String },
     resetPasswordTokenExpires: { type: Date },
 
-    password: { type: String, required: true },
+    password: { type: String },
   },
   { timestamps: true }
 );
