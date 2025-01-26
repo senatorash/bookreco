@@ -27,7 +27,10 @@ const Dashboard = () => {
 
   const onLogoutHandler = async (event) => {
     event.preventDefault();
+
     await logoutUser();
+
+    localStorage.clear();
   };
 
   return (
