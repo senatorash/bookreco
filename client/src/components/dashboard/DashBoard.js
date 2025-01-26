@@ -29,8 +29,6 @@ const Dashboard = () => {
     event.preventDefault();
 
     await logoutUser();
-
-    localStorage.clear();
   };
 
   return (
