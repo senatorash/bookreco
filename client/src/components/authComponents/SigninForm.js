@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../lib/apis/authApis";
+import { useSelector } from "react-redux";
+import {
+  useLoginUserMutation,
+  useLoginUserWithGoogleMutation,
+} from "../../lib/apis/authApis";
 // import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
+import { GoogleLogin } from "@react-oauth/google";
 import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +21,19 @@ const SigninForm = () => {
   const [loginUser, { error, data, isError, isLoading, isSuccess }] =
     useLoginUserMutation();
 
+  const [
+    loginUserWithGoogle,
+    { isSuccess: getSuccess, isError: getError, data: getData },
+  ] = useLoginUserWithGoogleMutation();
+  const { user } = useSelector((state) => state.userState);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user]);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -30,9 +47,13 @@ const SigninForm = () => {
     }
 
     const { data, error } = await loginUser({ email, password });
-    console.log(data);
 
     // if (!error) navigate("/dashboard");
+  };
+
+  const googleResponse = async (response) => {
+    console.log(response);
+    await loginUserWithGoogle({ token: response.credential });
   };
 
   useEffect(() => {
@@ -102,6 +123,7 @@ const SigninForm = () => {
         </div>
 
         <div className={classes.register}>
+          <GoogleLogin onSuccess={googleResponse} />
           <p>
             Don't have an account <Link to="/auth/signup">Sign up</Link>
           </p>

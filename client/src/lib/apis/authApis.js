@@ -21,10 +21,25 @@ export const authApis = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          await dispatch(userApis.endpoints.getCurrentUser.initiate());
+          await dispatch(userApis.endpoints.getCurrentUser.initiate(null));
         } catch (error) {
           console.log(error);
         }
+      },
+    }),
+
+    loginUserWithGoogle: builder.mutation({
+      query: (googleData) => ({
+        url: "/auth/google/login",
+        method: "POST",
+        body: googleData,
+        credentials: "include",
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          await dispatch(userApis.endpoints.getCurrentUser.initiate(null));
+        } catch (error) {}
       },
     }),
 
@@ -90,5 +105,5 @@ export const {
   useLogoutUserMutation,
   useResetPasswordRequestMutation,
   useUpdateUserPasswordMutation,
-  useGenerateNewAccessTokenMutation,
+  useLoginUserWithGoogleMutation,
 } = authApis;

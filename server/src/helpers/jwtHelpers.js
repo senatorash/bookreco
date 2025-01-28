@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const generateToken = (payLoad, expiresIn, secret) => {
   try {
     const token = jwt.sign(payLoad, secret, { expiresIn });
+    console.log(token);
     // console.log("Access token generated successfully");
     return token;
   } catch (error) {

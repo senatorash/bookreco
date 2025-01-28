@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import aboutImg from "../Assets/about-img.png";
 
 const AboutPage = () => {
@@ -42,7 +43,7 @@ const AboutPage = () => {
                   knowledge, and imagination. Happy reading! Feel free to modify
                   the name or tone to match your brand’s personality!
                 </p>
-                <a href="#">Read More</a>
+                <Link href="#">Read More</Link>
               </div>
             </div>
           </div>

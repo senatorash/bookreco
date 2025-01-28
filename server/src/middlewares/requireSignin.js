@@ -4,6 +4,7 @@ const requireSignin = (req, res, next) => {
   try {
     // destructure access token from req.cookie object
     const { accessToken } = req.cookies;
+    // const {authToken} =
 
     // return 401 error if cookie is not provided by client
     if (!accessToken) {

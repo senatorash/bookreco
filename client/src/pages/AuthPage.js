@@ -1,18 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
-  const { user } = useSelector((state) => state.userState);
+  // const { user } = useSelector((state) => state.userState);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [user]);
   return (
     <section className="container">
       <div className="row">

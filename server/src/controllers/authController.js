@@ -263,21 +263,34 @@ const googleAuth = async (req, res, next) => {
 
     if (userExist) {
       if (userExist.isVerified) {
-        const authToken = generateToken({
-          id: userExist._id,
+        const userData = {
+          userId: userExist._id,
+          firstName: userExist.firstName,
+          lastName: userExist.lastName,
           email: userExist.email,
-        });
+          isVerified: userExist.isVerified,
+          profilePicture: userExist.profilePicture,
+        };
+        const authToken = generateToken(
+          userData, // { userId: userExist._id.toString(), email: userExist.email },
+          `${ACCESS_TOKEN_EXPIRES_IN}h`,
+          JWT_SECRET
+        );
 
-        return res.status(200).json({
-          message: "User logged in successfully",
-          token: authToken,
-          user: {
-            id: userExist._id,
-            firstName: userExist.firstName,
-            lastName: userExist.lastName,
-            email: userExist.email,
-          },
-        });
+        const cookieOptions = {
+          expires: new Date(Date.now() + 30 * 1000),
+          maxAge: 60 * 60 * 1000,
+          httpOnly: true,
+          sameSite: "None",
+          secure: true,
+        };
+
+        return res
+          .cookie("accessToken", authToken, cookieOptions)
+          .status(200)
+          .json({
+            message: "User logged in successfully",
+          });
       }
 
       // If user exists but is not verified, send a verification email
@@ -305,7 +318,7 @@ const googleAuth = async (req, res, next) => {
     await newUser.save();
 
     // Send verification email to the new user
-    sendOtpToUser(newUser.verificationToken, userExist.email); // Pass the email correctly
+    sendOtpToUser(newUser.verificationToken, newUser.email); // Pass the email correctly
 
     return res.status(200).json({
       message: "User created successfully. Please verify your email.",

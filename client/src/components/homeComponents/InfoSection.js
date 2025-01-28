@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import MapComponent from "./MapComponent";
-const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+// import MapComponent from "./MapComponent";
+// const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const InfoSection = () => {
   return (
@@ -69,7 +69,7 @@ const InfoSection = () => {
 
           {/* Map Section */}
           <div className="col-md-6 col-lg-3 info-col">
-            <MapComponent apiKey={apiKey} />
+            {/* <MapComponent apiKey={apiKey} /> */}
           </div>
         </div>
       </div>
