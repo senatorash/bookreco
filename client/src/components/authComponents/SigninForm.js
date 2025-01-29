@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { GoogleLogin } from "@react-oauth/google";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   useLoginUserMutation,
   useLoginUserWithGoogleMutation,
 } from "../../lib/apis/authApis";
-// import { useGetCurrentUserMutation } from "../../lib/apis/userApis";
-import { GoogleLogin } from "@react-oauth/google";
 import Errors from "../commons/Errors";
 import classes from "./Auth.module.css";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SuccessCard from "../commons/SuccessCard";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
@@ -23,8 +23,14 @@ const SigninForm = () => {
 
   const [
     loginUserWithGoogle,
-    { isSuccess: getSuccess, isError: getError, data: getData },
+    {
+      isSuccess: getSuccess,
+      isError: getIsError,
+      data: getData,
+      error: getError,
+    },
   ] = useLoginUserWithGoogleMutation();
+
   const { user } = useSelector((state) => state.userState);
 
   const navigate = useNavigate();
@@ -45,16 +51,18 @@ const SigninForm = () => {
     if (!email || !password) {
       return;
     }
-
-    const { data, error } = await loginUser({ email, password });
-
-    // if (!error) navigate("/dashboard");
+    await loginUser({ email, password });
   };
 
   const googleResponse = async (response) => {
-    console.log(response);
     await loginUserWithGoogle({ token: response.credential });
   };
+
+  useEffect(() => {
+    if (getError?.status === 400) {
+      // navigate("/auth/verify");
+    }
+  }, [getError, navigate]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -79,6 +87,14 @@ const SigninForm = () => {
               error?.data?.message ||
               "something went wrong"
             }
+          />
+        )}
+
+        {getIsError && <Errors errorMessage={getError?.data?.error} />}
+
+        {getData?.message && (
+          <SuccessCard
+            successMessage={`${getData?.message} A mail has been sent to ${getData?.user?.email}`}
           />
         )}
 
@@ -122,8 +138,9 @@ const SigninForm = () => {
           />
         </div>
 
+        <GoogleLogin onSuccess={googleResponse} />
+
         <div className={classes.register}>
-          <GoogleLogin onSuccess={googleResponse} />
           <p>
             Don't have an account <Link to="/auth/signup">Sign up</Link>
           </p>

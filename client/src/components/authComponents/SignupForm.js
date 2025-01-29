@@ -8,6 +8,7 @@ import classes from "./Auth.module.css";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFormValidator from "../../hooks/useFormValidator";
+import SuccessCard from "../commons/SuccessCard";
 
 const SignupForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -76,7 +77,11 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/auth/verify");
+      const timer = setTimeout(() => {
+        navigate("/auth/verify");
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
   }, [isSuccess]);
 
@@ -85,15 +90,21 @@ const SignupForm = () => {
       <div className={classes.wrapper}>
         <h3 className="mb-3 mt-5">Sign Up</h3>
 
-        {formError && (
+        {/* {formError && (
           <div className="alert alert-danger mt-5" role="alert">
             {typeof formError === "string"
               ? formError
               : JSON.stringify(formError)}
           </div>
+        )} */}
+
+        {isSuccess && (
+          <SuccessCard
+            successMessage={`${data?.message}. A mail has been sent to ${data?.newUser?.email}`}
+          />
         )}
 
-        {/* {isError && (
+        {isError && (
           <Errors
             errorMessage={
               error?.data?.errors ||
@@ -101,7 +112,7 @@ const SignupForm = () => {
               "something went wrong"
             }
           />
-        )} */}
+        )}
 
         <div className={`form-group mb-3 ${classes.input_field}`}>
           <input

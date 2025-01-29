@@ -9,7 +9,7 @@ import userSlice from "../lib/redux/userSlice";
 const persistConfig = {
   key: "userState",
   storage,
-  // whitelist: ["user"],
+  whitelist: ["user"],
 };
 
 const persistedUserReducer = persistReducer(persistConfig, userSlice);

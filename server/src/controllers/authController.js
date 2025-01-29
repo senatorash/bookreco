@@ -301,7 +301,7 @@ const googleAuth = async (req, res, next) => {
       sendOtpToUser(userExist.verificationToken, userExist.email); // Pass the email correctly
 
       return res.status(400).json({
-        message: "Account not verified. Verification email sent.",
+        error: "Account not verified. Verification email sent.",
       });
     }
 
@@ -318,10 +318,11 @@ const googleAuth = async (req, res, next) => {
     await newUser.save();
 
     // Send verification email to the new user
-    sendOtpToUser(newUser.verificationToken, newUser.email); // Pass the email correctly
+    // sendOtpToUser(newUser.verificationToken, newUser.email); // Pass the email correctly
 
     return res.status(200).json({
-      message: "User created successfully. Please verify your email.",
+      message: "User created successfully.",
+      user: newUser,
     });
   } catch (error) {
     console.log(error);
