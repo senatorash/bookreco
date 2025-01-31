@@ -318,7 +318,7 @@ const googleAuth = async (req, res, next) => {
     await newUser.save();
 
     // Send verification email to the new user
-    // sendOtpToUser(newUser.verificationToken, newUser.email); // Pass the email correctly
+    sendOtpToUser(newUser.verificationToken, newUser.email); // Pass the email correctly
 
     return res.status(200).json({
       message: "User created successfully.",

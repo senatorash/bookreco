@@ -28,7 +28,7 @@ export const years = generateYears(1900);
 
 // Format timeLeft into mm:ss format for display
 export const formatTime = (seconds) => {
-  const adjustedSeconds = Math.max(0, seconds - 180);
+  const adjustedSeconds = Math.max(0, seconds - 3);
   const minutes = Math.floor(adjustedSeconds / 60);
   const remainingSeconds = adjustedSeconds % 60;
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;

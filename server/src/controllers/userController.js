@@ -45,7 +45,7 @@ const createNewUser = async (req, res) => {
       return res.status(400).json({ error: "User Creation Failed" });
     }
     // send generated otp to user email
-    // sendOtpToUser(newUser.verificationToken, newUser.email);
+    sendOtpToUser(newUser.verificationToken, newUser.email);
     // return success response if operation is successful
     return res
       .status(201)
