@@ -56,7 +56,6 @@ export const authApis = createApi({
           dispatch(clearCurrentUser());
           localStorage.removeItem("refreshToken");
           localStorage.clear();
-          await persistor.purge();
         } catch (error) {
           console.log(error);
         }
