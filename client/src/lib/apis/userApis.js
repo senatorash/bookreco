@@ -26,7 +26,7 @@ export const userApis = createApi({
 
     getCurrentUser: builder.mutation({
       query: () => ({
-        url: "users/me",
+        url: "/users/me",
         method: "GET",
         credentials: "include",
       }),

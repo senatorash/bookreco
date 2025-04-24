@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./store/store";
-// import ChatContextProvider from "./context/chat-context";
+// import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./store/store";
+import ChatContextProvider from "./context/chat-context";
 import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,13 +22,13 @@ root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            {/* <ChatContextProvider> */}
-            <App />
-            {/* </ChatContextProvider> */}
-          </BrowserRouter>
-        </PersistGate>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <BrowserRouter>
+          {/* <ChatContextProvider> */}
+          <App />
+          {/* </ChatContextProvider> */}
+        </BrowserRouter>
+        {/* </PersistGate> */}
       </Provider>
     </GoogleOAuthProvider>
   </React.StrictMode>

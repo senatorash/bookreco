@@ -5,25 +5,22 @@ const {
   getRoomUsers,
 } = require("./helpers/socket/socketHelpers");
 const messageFormat = require("./helpers/socket/messageFormat");
-
-const geminiConversation = require("./helpers/socket/gemini/gemini");
+const runGeminiConversation = require("./helpers/socket/gemini/gemini");
 
 const listen = async (io) => {
-  const bot = { name: "BookrecoAI" };
+  const bot = { name: "Bookreco" };
 
   io.on("connection", (socket) => {
-    console.log("user is connected");
-
     socket.on("joinRoom", ({ userData, room }) => {
       const user = userJoin(socket.id, userData, room);
       socket.join(user.room);
 
-      if (user.room === user?.firstName) {
+      if (user.room === userData.firstName) {
         socket.emit(
           "message",
           messageFormat(
             bot.name,
-            `Hello ${userData.firstName}, welcome to Bookreco AI, the best voice interacttive AI. How can I help you today?`,
+            `Hello ${userData.firstName}, welcome to Bookreco!.  How can I help you today?`,
             undefined,
             "new-msg"
           )
@@ -32,24 +29,41 @@ const listen = async (io) => {
     });
 
     socket.on("chatMessage", async (msg) => {
-      console.log(msg);
-      const user = getCurrentUser(userData);
+      const user = getCurrentUser(socket.id);
 
-      console.log(user);
-      if (user) {
+      io.to(user.room).emit(
+        "message",
+        messageFormat(user.userData.username, msg.message)
+      );
+
+      const response = await runGeminiConversation(msg.message);
+
+      if (response) {
         io.to(user.room).emit(
           "message",
-          messageFormat(user?.firstName, msg.message)
+          messageFormat(bot.name, response.replace(/\*/g, ""), undefined)
         );
+      }
+    });
 
-        const response = await geminiConversation(msg.message);
-
-        if (response) {
-          io.to(user.room).emit(
+    socket.on("leaveRoom", ({ userData, room }) => {
+      const user = userLeave(userData.username);
+      if (user) {
+        socket.broadcast
+          .to(room)
+          .emit(
             "message",
-            messageFormat(bot.name, response.replace(/\*/g, ""), undefined)
+            messageFormat(
+              bot.name,
+              `${userData.usernaem} has left the chat`,
+              undefined
+            )
           );
-        }
+
+        io.to(room).emit("roomUsers", {
+          room: user.room,
+          users: getRoomUsers(room),
+        });
       }
     });
   });

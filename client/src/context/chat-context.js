@@ -1,83 +1,59 @@
-// import { useState, createContext, useRef, useEffect } from "react";
-// import { useSelector } from "react-redux";
+// import { useRef, useState, useEffect, createContext } from "react";
 // import { io } from "socket.io-client";
+// import { useSelector } from "react-redux";
+// import { getRoomUsers } from "../../../server/src/helpers/socket/socketHelpers";
 
 // export const ChatContext = createContext({
-//   users: [],
-//   messages: [],
-//   updateCurrentUser: (firstName) => {},
-//   joinRoom: (firstName, room) => {},
-//   sendMessage: (message, firstName) => {},
-//   listenToChatMessage: () => {},
+//   socketMessages: [],
+//   sendMessage: (messageData) => {},
+//   joinRoom: (userData, room) => {},
+//   leaveRoom: (userData, room) => {},
+//   getRoomUsers: () => {},
 // });
 
+// const API_URL = "http://localhost:3001";
+
 // const ChatContextProvider = ({ children }) => {
-//   const [users, setUsers] = useState([]);
-//   const [messages, setMessages] = useState([]);
+//   const [socketMessages, setSocketMessages] = useState([]);
+//   const [roomUsers, setRoomUsers] = useState([]);
 
 //   const { user } = useSelector((state) => state.userState);
-//   const API_URL = "http://localhost:3001";
+//   console.log(user);
+//   const socket = useRef(io(API_URL));
 
-//   useEffect(() => {
-//     setUsers(user);
-//   }, [user]);
-
-//   const socket = useRef(null); // Ref to manage the socket instance
-
-//   useEffect(() => {
-//     // Initialize the socket connection when the component mounts
-//     socket.current = io(API_URL);
-
-//     // Listen for updates on users in the room
-//     socket.current.on("roomUsers", (roomData) => {
-//       setUsers(roomData.users || []); // Update the users state with room data
-//     });
-
-//     // Cleanup: Disconnect the socket when the component unmounts
-//     return () => {
-//       socket?.current?.off("roomUsers");
-//     };
-//   }, []);
-
-//   const updateCurrentUser = (firstName) => {
-//     if (socket?.current) {
-//       socket.current.emit("updateUser", { firstName });
-//     }
-//   };
-
-//   const joinRoom = (firstName, room) => {
-//     if (socket?.current) {
-//       socket?.current?.emit("joinRoom", { firstName, room });
-//     }
-//   };
-
-//   socket?.current?.on("roomUsers", (roomData) => {
-//     if (socket?.current) {
-//       setUsers(roomData.users || []);
-//     }
-//   });
-
-//   // emit chat message event to the socket server
-//   const sendMessage = (message, firstName) => {
-//     socket?.current?.emit("chatMessage", { message, firstName });
-//   };
-
-//   // listen to  messages event emitted from socket server
-//   const listenToChatMessage = () => {
-//     socket?.current?.on("message", (message) => {
-//       setMessages((prevMessages) => [...prevMessages, message]);
+//   const joinRoom = () => {
+//     socket?.current?.emit("joinRoom", {
+//       userData: { username: user?.firstName },
+//       room: user?.firstName,
 //     });
 //   };
+
+//   const sendMessage = async (messageData) => {
+//     socket?.current?.emit("chatMessage", messageData);
+//   };
+
+//   useEffect(() => {
+//     socket?.current?.on("message", (msg) => {
+//       if (msg.type || msg.type === "new-msg") {
+//         return setSocketMessages([msg]);
+//       }
+//       setSocketMessages((socketMessages) => [...socketMessages, msg]);
+//     });
+//     return () => socket?.current?.off("message");
+//   }, [socket]);
+
+//   // const getRoomUsers = () => {
+//   //   socket?.current?.on("roomUsers", ({ room, user }) => {
+//   //     setRoomUsers(user);
+//   //   });
+//   // };
 
 //   const value = {
-//     user,
-//     messages,
-//     updateCurrentUser,
-//     joinRoom,
 //     sendMessage,
-//     listenToChatMessage,
+//     joinRoom,
+//     socketMessages,
 //   };
-
 //   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 // };
+
 // export default ChatContextProvider;

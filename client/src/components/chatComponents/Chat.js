@@ -1,51 +1,46 @@
-import { useContext, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
-import { ChatContext } from "../../context/chat-context";
+// import { useContext, useEffect, useRef } from "react";
+// import { useSearchParams } from "react-router-dom";
+// import { ChatContext } from "../../context/chat-context";
 
-const Chat = () => {
-  const [searchParams] = useSearchParams();
-  const room = searchParams.get("room");
+// const Chat = () => {
+//   const [searchParams] = useSearchParams();
+//   const room = searchParams.get("room");
 
-  const chatCtx = useContext(ChatContext);
-  const messageRef = useRef();
+//   const chatCtx = useContext(ChatContext);
+//   const messageRef = useRef();
 
-  useEffect(() => {
-    chatCtx.listenToChatMessage();
-    chatCtx.updateCurrentUser();
-  }, []);
+//   useEffect(() => {
+//     chatCtx.getRoomUsers();
+//   }, []);
 
-  useEffect(() => {
-    if (chatCtx.currentUser && room) {
-      chatCtx.joinRoom(chatCtx?.currentUser, room);
-    }
-  }, [room, chatCtx.currentUser]);
+//   useEffect(() => {
+//     if (room) {
+//       chatCtx.joinRoom("Guest", room);
+//     }
+//   }, [room]);
 
-  // send message handler function
-  const sendMessageHandler = (event) => {
-    event.preventDefault();
+//   const sendMessageHandler = (event) => {
+//     event.preventDefault();
+//     const message = messageRef.current.value;
 
-    const message = messageRef?.current?.value;
+//     if (!message) return;
 
-    if (!message) return;
+//     chatCtx.sendMessage(message);
+//     messageRef.current.value = "";
+//   };
 
-    chatCtx.sendMessage(message, chatCtx.currentUser);
+//   return (
+//     <div>
+//       <form onSubmit={sendMessageHandler}>
+//         <input
+//           className="form-control"
+//           placeholder="Enter Message"
+//           ref={messageRef}
+//         />
+//         <button type="submit">Send</button>
+//       </form>
+//     </div>
+//   );
+// };
 
-    chatCtx.listenToChatMessage();
-
-    return (messageRef.current.value = "");
-  };
-  return (
-    <div style={{ marginTop: "200px", marginBottom: "200px" }}>
-      <form onSubmit={sendMessageHandler}>
-        <div className="form-group">
-          <input
-            className="form-control"
-            placeholder="Enter Message"
-            ref={messageRef}
-          />
-        </div>
-      </form>
-    </div>
-  );
-};
-export default Chat;
+// export default Chat;
